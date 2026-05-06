@@ -1,7 +1,7 @@
 ---
 threat_summary:
   title: "Session Hijacking & Tax-Lure Backdoors: MFA Is No Longer Enough"
-  report_date: "2026-05-06"
+  report_date: "2026-04-06"
   threat_id: "TI-20260506-001"
   severity_business: "Critical"
   severity_technical: "Critical"
