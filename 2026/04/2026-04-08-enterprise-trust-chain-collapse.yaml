@@ -1,8 +1,8 @@
 ---
 threat_summary:
   title: "Enterprise Trust Chain Collapse Across Cloud, Open Source, and Identity Systems"
-  report_date: "2026-05-08"
-  threat_id: "TI-20260508-CHAOS"
+  report_date: "2026-04-08"
+  threat_id: "TI-20260408-CHAOS"
   severity_business: "Critical"
   severity_technical: "Critical"
 
@@ -162,7 +162,7 @@ source_articles:
 
 metadata:
   author: "Am Dum Dee"
-  last_updated: "2026-05-08"
+  last_updated: "2026-04-08"
   threat_category:
     - "Supply Chain"
     - "Identity Threats"
