@@ -1,0 +1,176 @@
+---
+threat_summary:
+  title: "AI Agents Become Enterprise Attack Surface"
+  report_date: "2026-03-01"
+  threat_id: "TI-20260301-AI01"
+  severity_business: "Critical"
+  severity_technical: "Critical"
+
+  executive_summary: |
+    Multiple March 2026 incidents show attackers rapidly operationalizing AI tools, autonomous agents, and exposed edge systems to accelerate cyberattacks against governments, enterprises, and developers.
+
+    The most significant developments include attackers abusing Claude Code to compromise Mexican government agencies and steal 150GB of data, the ClawJacked vulnerability allowing browser-based hijacking of OpenClaw AI agents, and continued exploitation of enterprise infrastructure including FreePBX and Cisco SD-WAN systems.
+
+    Boards should view these incidents as evidence that AI is no longer only a productivity tool. It is now an operational attack multiplier capable of reducing attacker skill requirements, increasing attack speed, and expanding enterprise liability exposure.
+
+threat_intelligence:
+  what_happened:
+    incident_overview: |
+      Researchers disclosed "ClawJacked," a vulnerability affecting OpenClaw AI agents that allowed malicious websites to silently brute-force access to locally running AI systems through browser sessions. Once compromised, attackers could execute commands, access files, steal credentials, and control connected systems.
+
+      Separately, Gambit Security reported that attackers abused Anthropic's Claude Code and OpenAI models during a cyberattack targeting Mexican government organizations. The campaign compromised multiple agencies and exposed approximately 195 million identities after attackers used AI systems to automate exploitation and organize stolen information.
+
+      Enterprise infrastructure also remained heavily targeted. Approximately 900 Sangoma FreePBX systems were reportedly infected with web shells after exploitation of a command injection vulnerability. Additional reporting highlighted active exploitation against Cisco SD-WAN, Soliton FileZen, and developer ecosystems through malicious npm packages.
+
+      Collectively, these incidents show a convergence between AI automation, supply-chain compromise, and edge infrastructure exploitation that significantly lowers operational barriers for attackers.
+
+    affected_organizations:
+      - name: "Mexican Government Agencies"
+        impact: "150GB of sensitive data stolen and exposure of approximately 195 million identities"
+
+      - name: "Sangoma FreePBX Customers"
+        impact: "Persistent web shell compromise and long-term unauthorized access"
+
+      - name: "Enterprise AI Users"
+        impact: "Potential workstation compromise through AI-agent hijacking"
+
+      - name: "Developer Ecosystems"
+        impact: "Credential theft and self-propagating malware infections"
+
+    attack_methodology: |
+      Attackers increasingly combine AI tools, automation frameworks, and exposed internet-facing systems to reduce human effort during cyber operations.
+
+      In the OpenClaw incident, malicious websites abused browser behavior to communicate directly with locally running AI agents, bypass authentication protections, and silently register trusted devices.
+
+      In the Mexican government breach, attackers reportedly manipulated AI assistants into generating exploit guidance, identifying targets, organizing stolen credentials, and accelerating lateral movement inside government environments.
+
+      Infrastructure attacks against FreePBX and SD-WAN systems followed a familiar pattern: exploit exposed services, establish persistence, remove evidence, and maintain long-term operational access.
+
+  why_it_matters:
+    business_risks:
+      financial_exposure: |
+        Enterprise breaches involving AI systems can create multimillion-dollar exposure through operational disruption, legal settlements, regulatory penalties, cyber insurance increases, and customer attrition.
+
+        Ponemon research cited in industry reporting estimates insider-risk-related incidents now average $19.5 million annually per organization. AI-assisted attacks could materially increase that figure by accelerating compromise timelines and expanding breach scale.
+
+      regulatory_compliance: |
+        Organizations handling regulated data face increased exposure under GDPR, state privacy laws, critical infrastructure regulations, and disclosure requirements tied to material cyber incidents.
+
+        AI systems integrated into operational workflows may also create governance gaps around accountability, auditability, and decision authorization.
+
+      competitive_impact: |
+        Enterprises deploying AI without strong governance may gain short-term efficiency but increase long-term operational and reputational risk.
+
+        Organizations demonstrating resilient AI governance may gain competitive advantages in customer trust, cyber insurance negotiations, and regulatory scrutiny.
+
+      operational_disruption: |
+        AI-enabled compromise can impact identity systems, developer environments, customer operations, and communications infrastructure simultaneously.
+
+        Recovery timelines may extend significantly when attackers leverage automation to maintain persistence and expand lateral access before detection.
+
+    industry_patterns:
+      affected_sectors:
+        - "Government"
+        - "Financial Services"
+        - "Technology"
+        - "Telecommunications"
+        - "Critical Infrastructure"
+
+      trend_analysis: |
+        These incidents are not isolated. Multiple reports now show attackers systematically integrating AI into phishing, exploit development, reconnaissance, credential analysis, and operational planning.
+
+        Edge infrastructure, AI agents, and developer ecosystems are becoming preferred attack surfaces because they provide broad operational leverage with comparatively low attacker investment.
+
+technical_context:
+  vulnerability_details:
+    cve_identifier: "CVE-2025-64328, CVE-2026-20127"
+    vulnerability_type: "AI-agent hijacking, command injection, authentication bypass, and persistent remote access"
+    affected_systems:
+      - "OpenClaw AI Agent"
+      - "Sangoma FreePBX"
+      - "Cisco SD-WAN"
+      - "Developer npm ecosystems"
+    exploitation_status: "Active"
+
+  attack_indicators:
+    - "Unexpected AI-agent actions or autonomous system behavior"
+    - "Persistent unauthorized remote access on edge infrastructure"
+    - "Unusual developer package installations or credential theft activity"
+    - "Rapid privilege escalation and automated reconnaissance"
+
+strategic_response:
+  executive_decisions:
+    - priority: "Critical"
+      decision: "Establish AI governance and access control framework"
+      business_justification: "AI agents increasingly hold privileged operational access across enterprise systems"
+      cost_estimate: "$1M-$5M depending on enterprise scale"
+
+    - priority: "High"
+      decision: "Accelerate replacement or isolation of unsupported edge infrastructure"
+      business_justification: "Internet-facing systems remain primary entry points for persistent compromise"
+      cost_estimate: "$500K-$10M infrastructure modernization"
+
+    - priority: "High"
+      decision: "Implement enterprise-wide software supply chain oversight"
+      business_justification: "Developer ecosystems are increasingly targeted for credential theft and propagation"
+      cost_estimate: "$250K-$2M"
+
+  governance_implications:
+    board_reporting: |
+      Boards should track AI-system access privileges, edge-system exposure, patch remediation timelines, autonomous workflow approvals, and third-party AI vendor risk assessments.
+
+    disclosure_requirements: |
+      Material cyber incidents involving regulated data, operational outages, or AI misuse may trigger mandatory disclosure obligations across multiple jurisdictions.
+
+analysis_and_insights:
+  uncomfortable_truths: |
+    Most enterprises are deploying AI faster than they are governing it. Security teams often lack visibility into what autonomous systems can access, what actions they can take, or how those actions are monitored.
+
+    Many organizations still measure cybersecurity maturity through compliance completion rather than operational resilience. Attackers are exploiting that gap by automating reconnaissance, persistence, and lateral movement faster than human-led defenses can respond.
+
+  strategic_lessons:
+    - "AI agents should be treated as privileged identities, not productivity tools"
+    - "Edge infrastructure remains one of the highest-return attack surfaces"
+    - "Automation now benefits attackers and defenders simultaneously"
+    - "Cyber resilience must be measured operationally, not cosmetically"
+
+forward_outlook:
+  predictions: |
+    Over the next 6-12 months, organizations will face increasing pressure to govern AI systems as operational assets rather than experimental productivity tools.
+
+    AI-assisted cyberattacks will likely continue reducing attacker skill requirements while increasing attack speed, scale, and persistence. Enterprises that fail to establish governance, segmentation, and operational controls around autonomous systems may experience materially higher breach impact and regulatory scrutiny.
+
+source_articles:
+  - title: "ClawJacked attack let malicious websites hijack OpenClaw to steal data"
+    url: "https://www.bleepingcomputer.com/"
+    date: "2026-03-01"
+
+  - title: "Claude Code abused to steal 150GB in cyberattack on Mexican agencies"
+    url: "https://securityaffairs.com/"
+    date: "2026-03-01"
+
+  - title: "CVE-2025-64328 exploitation impacts 900 Sangoma FreePBX instances"
+    url: "https://securityaffairs.com/"
+    date: "2026-03-01"
+
+  - title: "Week in review: Self-spreading npm malware hits developers"
+    url: "https://www.helpnetsecurity.com/"
+    date: "2026-03-01"
+
+  - title: "Koofr cloud storage lifetime deal"
+    url: "https://www.bleepingcomputer.com/"
+    date: "2026-03-01"
+
+metadata:
+  author: "Am Dum Dee"
+  last_updated: "2026-03-01"
+  threat_category:
+    - "AI Security"
+    - "Supply Chain Risk"
+    - "Edge Infrastructure"
+  affected_industries:
+    - "Government"
+    - "Technology"
+    - "Telecommunications"
+    - "Financial Services"
+  confidence_level: "High"
