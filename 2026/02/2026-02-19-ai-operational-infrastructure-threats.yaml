@@ -1,8 +1,8 @@
 ---
 threat_summary:
   title: "AI-Driven Operational Infrastructure Threat Escalation"
-  report_date: "2026-02-20"
-  threat_id: "TI-20260220-OPS"
+  report_date: "2026-02-19"
+  threat_id: "TI-20260219-OPS"
   severity_business: "Critical"
   severity_technical: "Critical"
 
@@ -144,7 +144,7 @@ source_articles:
 
 metadata:
   author: "Am Dum Dee"
-  last_updated: "2026-02-20"
+  last_updated: "2026-02-19"
   threat_category:
     - "Operational Technology"
     - "AI-Driven Threats"
