@@ -1,0 +1,349 @@
+---
+threat_summary:
+  title: "Social Engineering at Scale: Nation-State Supply Chain Attacks,
+    Weaponized Google Services, and the End of Platform Trust"
+  report_date: "2026-02-15"
+  threat_id: "TI-20260215-001"
+  severity_business: "Critical"
+  severity_technical: "Critical"
+
+  executive_summary: |
+    On February 15, 2026, three converging threat disclosures confirmed that
+    attackers have fully industrialized social engineering as a primary
+    enterprise attack vector. North Korea's Lazarus Group ran a nine-month
+    fake recruitment campaign on LinkedIn, Reddit, and Facebook, tricking
+    developers into running malicious code during fake job interviews. One
+    package accumulated 10,000+ downloads before the malicious payload was
+    pushed. Simultaneously, attackers weaponized Google Groups, Google Docs,
+    and Google Drive to distribute credential-stealing malware to global
+    organizations, bypassing security filters that trust Google infrastructure.
+
+    Microsoft disclosed a new variant of the ClickFix attack — where employees
+    are manipulated into running commands on their own machines — now using DNS
+    as a covert delivery channel to evade detection. Lumma Stealer, one of the
+    most active credential-theft tools in circulation, is now distributed
+    through at least six distinct attack chains including fake CAPTCHAs, piracy
+    sites, AI platform links, and Google-sponsored search results.
+
+    Boards must recognize this as a structural shift: the perimeter is no
+    longer the target. Employees, developers, and trusted platforms are. Time
+    sensitivity is critical — these campaigns are active, ongoing, and
+    specifically designed to evade existing enterprise controls.
+
+threat_intelligence:
+  what_happened:
+    incident_overview: |
+      Lazarus Group (North Korea) ran a campaign named "graphalgo" since May
+      2025, creating a fake blockchain company called Veltrix Capital with
+      legitimate-looking websites and GitHub organizations. Developers were
+      approached on LinkedIn, Facebook, and Reddit with job opportunities.
+      Interview tasks directed candidates to GitHub repositories containing
+      projects that depended on malicious npm and PyPI packages. When
+      candidates ran the tasks, malware executed silently. One package,
+      bigmathutils, reached 10,000+ downloads before attackers pushed the
+      malicious update — demonstrating patience and supply chain sophistication.
+
+      A separate active campaign abused 4,000+ Google Groups and 3,500
+      Google-hosted URLs to distribute Lumma Stealer (Windows) and a
+      trojanized browser called Ninja Browser (Linux). Posts in industry
+      forums appeared as legitimate technical discussions before embedding
+      download links. Because delivery infrastructure ran on Google-owned
+      services, standard trust-based filtering did not flag the content.
+
+      Microsoft disclosed a DNS-based variant of ClickFix where employees
+      are shown fake error messages or CAPTCHA screens and instructed to
+      run commands that trigger malware downloads. The new version routes
+      payloads through DNS queries — normal network traffic — making it
+      invisible to web content filters. The final payload is ModeloRAT, a
+      remote access tool that gives attackers persistent control.
+
+    affected_organizations:
+      - name: "Software development teams globally"
+        impact: "Developer machine compromise, credential theft, crypto
+          wallet access, lateral movement into production systems"
+      - name: "Enterprises using Google Workspace and Google services"
+        impact: "Credential harvesting via trusted Google infrastructure;
+          session token theft enabling cloud account takeover"
+      - name: "Organizations with Mac users"
+        impact: "Active macOS credential theft campaigns targeting 103
+          Chrome crypto extensions and Keychain data; previously
+          underprotected environment"
+      - name: "Cryptocurrency and fintech sector"
+        impact: "Direct financial theft via wallet seed phrase exfiltration;
+          irreversible transaction risk"
+
+    attack_methodology: |
+      Lazarus Group's methodology is a four-month trust-building operation.
+      Fake companies are created with AI-generated content, real-looking
+      GitHub activity, and manufactured contributor networks. Victims are
+      recruited through professional platforms and given coding tasks that
+      appear legitimate. The malicious payload is embedded as a dependency —
+      not in the task itself — so the candidate never sees suspicious code.
+      Once executed, a remote access trojan is installed with file access,
+      command execution, and crypto wallet targeting.
+
+      The Google Groups campaign exploits platform trust: security tools
+      treat google.com domains as safe. Attackers post in industry-relevant
+      forums, embed download links with organization-specific branding, and
+      deliver oversized archives (950MB) padded with empty data to bypass
+      antivirus file-size limits. The actual malware is 33MB hidden inside.
+
+      ClickFix exploits procedural trust — employees follow what appear to
+      be IT instructions. The DNS variant hides the download request inside
+      routine network traffic, making behavioral detection significantly
+      harder. No vulnerability is exploited. The user executes the attack.
+
+  why_it_matters:
+    business_risks:
+      financial_exposure: |
+        Developer machine compromise via Lazarus Group provides access to
+        source code repositories, cloud credentials, API keys, and
+        production deployment pipelines. A single compromised senior
+        developer can expose an entire codebase and cloud environment.
+        Lumma Stealer specifically targets session cookies — bypassing MFA
+        — enabling immediate cloud account takeover without needing
+        passwords. Average cost of a supply chain breach: $4.88M base
+        (IBM 2024), 40% higher than standard breaches. Crypto theft via
+        seed phrase exfiltration is instantaneous and irreversible.
+
+      regulatory_compliance: |
+        Developer credential theft leading to customer data access triggers
+        GDPR 72-hour notification. Session cookie theft enabling cloud
+        account access may constitute a reportable breach under CCPA, HIPAA
+        (if health data accessible), and SEC material disclosure rules for
+        public companies. Lazarus Group is a sanctioned North Korean entity
+        — any ransom payment or indirect financial interaction carries OFAC
+        violation risk. Supply chain compromise affecting software products
+        may trigger customer breach notification obligations downstream.
+
+      competitive_impact: |
+        Source code theft via compromised developer machines represents
+        direct IP loss. For software companies, this means competitors —
+        or state actors — gaining access to unreleased products, proprietary
+        algorithms, and customer data architectures. The Lazarus campaign
+        specifically targets cryptocurrency and blockchain firms, suggesting
+        both financial and intelligence collection motives. Organizations
+        that cannot demonstrate supply chain security controls will face
+        increasing scrutiny in enterprise procurement and cyber insurance
+        underwriting.
+
+      operational_disruption: |
+        A compromised developer machine with production access can require
+        full credential rotation across cloud environments, CI/CD pipelines,
+        and code repositories — a process taking days to weeks and halting
+        release cycles. Remote access trojan installation creates persistent
+        attacker presence that survives password resets unless the device
+        is fully reimaged. Google Groups-based campaigns targeting multiple
+        employees simultaneously can trigger parallel compromise events
+        that overwhelm incident response capacity.
+
+    industry_patterns:
+      affected_sectors:
+        - "Software development and technology"
+        - "Cryptocurrency and blockchain"
+        - "Financial services and fintech"
+        - "Any enterprise with developer or engineering teams"
+        - "Organizations using Google Workspace"
+
+      trend_analysis: |
+        These incidents confirm a two-year acceleration in human-targeted,
+        platform-abusing attack campaigns. ClickFix alone has spawned six
+        named variants in under 24 months. Lazarus Group has run continuous
+        fake recruitment campaigns since at least 2023, evolving each
+        iteration to rebuild credibility after exposure. The weaponization
+        of Google's trusted ecosystem is a deliberate bypass of security
+        investments in perimeter and content filtering. This pattern is
+        worsening: attacker operational patience (9-month campaigns) is
+        increasing while defender detection windows remain measured in weeks.
+
+technical_context:
+  vulnerability_details:
+    cve_identifier: "N/A (social engineering; no software vulnerability
+      exploited)"
+    vulnerability_type: "Supply chain dependency injection; trusted platform
+      abuse; user-executed payload delivery via social manipulation"
+    affected_systems:
+      - "npm and PyPI package ecosystems"
+      - "Google Groups, Google Docs, Google Drive"
+      - "Windows (ClickFix/ModeloRAT/Lumma Stealer)"
+      - "macOS (Odyssey Stealer, AppleScript campaigns)"
+      - "Linux (Ninja Browser trojan)"
+    exploitation_status: "Active — multiple campaigns ongoing globally"
+
+  attack_indicators:
+    - "Developer machines initiating unexpected DNS queries to external
+      resolvers not in corporate DNS policy"
+    - "New scheduled tasks referencing Realtek drivers or system-adjacent
+      process names"
+    - "Browser extensions installed without IT ticket or user-initiated
+      request"
+    - "Outbound HTTP POST requests with multipart/form-data to unknown
+      domains from developer workstations"
+    - "Recruitment outreach from blockchain or crypto firms with no
+      verifiable leadership team"
+    - "npm or PyPI packages in developer environments with recent update
+      activity not matching project release cycles"
+
+strategic_response:
+  executive_decisions:
+    - priority: "Critical"
+      decision: "Implement mandatory open-source package vetting before
+        any dependency enters development pipelines — automated scanning
+        plus human review for packages under 12 months old"
+      business_justification: "One malicious package with 10,000+ downloads
+        demonstrates that popularity is not safety. Your developers are
+        the last line of defense in a supply chain attack and are not
+        equipped to be. This requires a process, not awareness training."
+      cost_estimate: "Software composition analysis tooling: $20K-$80K
+        annually. Internal process cost: 0.5 FTE. Cost of undetected
+        supply chain breach: $6M-$10M+."
+
+    - priority: "Critical"
+      decision: "Brief all developer, engineering, and recruiting teams
+        on fake recruitment as a nation-state attack vector — establish
+        a verification protocol for unsolicited coding task requests"
+      business_justification: "Lazarus Group specifically targets senior
+        developers with production access. A 30-minute briefing and a
+        verification checklist costs nothing. A compromised engineering
+        lead costs your deployment pipeline, your codebase, and potentially
+        your customer data."
+      cost_estimate: "Awareness program: $5K-$15K. Zero if internal.
+        Unmitigated developer compromise: $500K-$5M in incident response
+        and IP exposure."
+
+    - priority: "High"
+      decision: "Revoke the Google-as-trusted-domain exception in your
+        security filtering — treat Google Docs and Drive redirect links
+        with the same scrutiny as unknown URLs"
+      business_justification: "4,000+ malicious Google Groups are active.
+        Your security stack currently treats them as safe. This is a
+        misconfiguration, not a gap — and attackers are exploiting it
+        at scale."
+      cost_estimate: "Policy update: minimal. Potential productivity
+        adjustment period: 2-4 weeks. Unfiltered Google-delivered malware
+        incident: $1M-$4M."
+
+    - priority: "High"
+      decision: "Extend endpoint detection coverage explicitly to macOS
+        devices — end the policy exemption that treats Apple machines
+        as low-risk"
+      business_justification: "103 Chrome crypto extensions are actively
+        targeted by macOS stealers. Senior developers and executives
+        disproportionately use Macs. Attackers know this. Your security
+        stack likely does not cover it equally."
+      cost_estimate: "EDR extension to macOS: $15K-$50K annually depending
+        on fleet size. Current unprotected exposure: unquantified but
+        growing rapidly."
+
+  governance_implications:
+    board_reporting: |
+      Add to quarterly reporting: (1) Open-source dependency scan coverage
+      rate across all development teams; (2) Number of unsolicited external
+      coding task requests reported by developers; (3) macOS endpoint
+      detection coverage vs. Windows parity; (4) Google Workspace
+      third-party redirect filtering status; (5) Active Lazarus/nation-state
+      campaign alerts from threat intelligence feeds.
+
+    disclosure_requirements: |
+      If developer machine compromise is confirmed, immediately assess
+      whether production systems, customer data repositories, or cloud
+      environments were accessible from the compromised device. GDPR
+      72-hour clock starts on discovery of customer data access. SEC
+      material disclosure assessment required if source code or customer
+      data of material value was exposed. Lazarus Group attribution
+      triggers OFAC review before any external payments related to
+      the incident.
+
+analysis_and_insights:
+  uncomfortable_truths: |
+    Your security awareness training teaches employees to spot bad grammar
+    in phishing emails. Lazarus Group spent four months building a fake
+    company with a real website, real GitHub repos, and real-looking
+    recruiters before sending a single malicious file. Awareness training
+    was not designed for this threat level and will not stop it.
+
+    Trusting Google because it's Google is the exploit. Attackers have
+    systematically mapped which platforms your security tools implicitly
+    trust and built their delivery infrastructure there. The same logic
+    applies to npm, PyPI, GitHub, and any other platform your developers
+    treat as inherently safe. Trust in a platform's reputation is now a
+    documented attack surface.
+
+    The "Macs don't get viruses" assumption is not just outdated — it is
+    a policy gap that attackers are actively funding campaigns to exploit.
+    Executive and senior developer machines running macOS with no EDR
+    coverage represent the highest-value, lowest-protection devices in
+    most enterprise environments.
+
+  strategic_lessons:
+    - "Nation-state attackers invest in trust-building over months —
+      your detection strategy must account for slow, patient campaigns
+      not just fast intrusions"
+    - "Platform trust (Google, npm, GitHub) is an exploitable assumption —
+      security controls must evaluate content, not just source"
+    - "Developers with production access are high-value targets requiring
+      the same protection level as executives"
+    - "Human execution of attacker payloads bypasses technical controls —
+      process design matters as much as tooling"
+    - "macOS endpoint protection parity with Windows is now a board-level
+      risk decision, not an IT preference"
+
+forward_outlook:
+  predictions: |
+    Over the next 6-12 months, fake recruitment campaigns will expand
+    beyond cryptocurrency to target AI, defense, and pharmaceutical
+    developers as Lazarus Group diversifies collection priorities.
+    Campaign sophistication will increase: expect AI-generated video
+    interviews, deeper fake company histories, and malicious packages
+    with longer clean periods before payload delivery. Supply chain
+    security scanning will become a standard procurement requirement
+    in enterprise software vendor assessments.
+
+    ClickFix and its variants will become the dominant user-execution
+    delivery mechanism, replacing traditional phishing attachments.
+    DNS-based payload staging will be adopted more broadly as it
+    demonstrably evades web filtering. Google, Microsoft, and Apple
+    will face increasing regulatory pressure to implement publisher
+    verification for content hosted on their platforms. Organizations
+    that have not achieved macOS EDR parity by end of 2026 will face
+    cyber insurance exclusions for Mac-originated incidents.
+
+source_articles:
+  - title: "Malicious npm and PyPI Packages Linked to Lazarus APT Fake
+      Recruiter Campaign"
+    url: "https://securityaffairs.com/175151/apt/malicious-npm-and-pypi-packages-linked-to-lazarus-apt-fake-recruiter-campaign.html"
+    date: "2026-02-15"
+
+  - title: "Security Affairs Malware Newsletter Round 84"
+    url: "https://securityaffairs.com/175168/malware/security-affairs-malware-newsletter-round-84.html"
+    date: "2026-02-15"
+
+  - title: "Canada Goose investigating as hackers leak 600K customer records"
+    url: "https://www.bleepingcomputer.com/news/security/canada-goose-investigating-as-hackers-leak-600k-customer-records/"
+    date: "2026-02-15"
+
+  - title: "CTM360: Lumma Stealer and Ninja Browser malware campaign
+      abusing Google Groups"
+    url: "https://www.bleepingcomputer.com/news/security/ctm360-lumma-stealer-and-ninja-browser-malware-campaign-abusing-google-groups/"
+    date: "2026-02-15"
+
+  - title: "Microsoft Discloses DNS-Based ClickFix Attack Using Nslookup
+      for Malware Staging"
+    url: "https://thehackernews.com/2026/02/microsoft-discloses-dns-based-clickfix.html"
+    date: "2026-02-15"
+
+metadata:
+  author: "Am Dum Dee"
+  last_updated: "2026-02-15"
+  threat_category:
+    - "Supply Chain Attack"
+    - "Social Engineering"
+    - "Credential Theft"
+    - "Nation-State Threat"
+    - "Trusted Platform Abuse"
+  affected_industries:
+    - "Software Development"
+    - "Cryptocurrency and Blockchain"
+    - "Financial Services"
+    - "Enterprise (All Sectors)"
+  confidence_level: "High"
