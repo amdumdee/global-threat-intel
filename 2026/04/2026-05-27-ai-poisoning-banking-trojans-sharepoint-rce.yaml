@@ -1,0 +1,304 @@
+---
+threat_summary:
+  title: "Triple Threat: AI Chatbot Poisoning, Banking Trojans, and SharePoint RCE Converge"
+  report_date: "2026-05-27"
+  threat_id: "TI-20260527-001"
+  severity_business: "Critical"
+  severity_technical: "Critical"
+
+  executive_summary: |
+    Three simultaneous threat campaigns are exploiting the tools organizations 
+    trust most: AI assistants, collaboration platforms, and enterprise content 
+    systems. Microsoft confirmed that AI chatbots are actively recommending 
+    malicious download links to users, representing a fundamental shift in 
+    how attackers reach employees — bypassing email filters entirely.
+
+    Simultaneously, Grandoreiro banking malware (active since 2016) has 
+    evolved to hide inside video-conferencing traffic protocols, targeting 
+    financial institutions across Portugal, Spain, and Mexico. A separate 
+    Android RAT (BTMOB) is being sold as a subscription service for $700/month, 
+    lowering the barrier for criminal operators targeting mobile banking users.
+
+    A critical Microsoft SharePoint flaw (CVE-2026-45659, CVSS 8.8) requiring 
+    only a low-privilege account is now patched but unpatched systems remain 
+    immediately exploitable. Boards should treat this week as a threshold 
+    moment: the attack surface now formally includes AI-generated content.
+
+threat_intelligence:
+  what_happened:
+    incident_overview: |
+      Microsoft researchers identified an active cryptojacking campaign 
+      that manipulated both search engine rankings and AI chatbot responses 
+      to direct users to malicious software download pages. Employees 
+      searching for common system utilities — software typically installed 
+      by technical staff with high-performance workstations — were served 
+      attacker-controlled lookalike websites. Over 150 malicious domains 
+      have been identified since March 2026.
+
+      Once installed, malware deployed ScreenConnect (a legitimate IT 
+      remote management tool) giving attackers persistent, hidden access 
+      to compromised machines. The attackers then ran GPU cryptocurrency 
+      miners inside trusted Microsoft-signed Windows processes, 
+      deliberately targeting high-performance hardware to maximize 
+      mining profit per device.
+
+      Separately, the Grandoreiro banking trojan campaign evolved its 
+      evasion by embedding communications inside WebRTC and WebSocket 
+      protocols — the same technology your video conferencing uses — 
+      making malicious traffic indistinguishable from legitimate 
+      business communications to most monitoring tools.
+
+      The BTMOB Android RAT, sold commercially for $700/month, automates 
+      credential theft on mobile devices by injecting fake login screens 
+      when banking apps are opened. Its leaked source code now circulates 
+      on criminal forums, enabling copycat campaigns.
+
+    affected_organizations:
+      - name: "Financial institutions — Portugal, Spain, Mexico"
+        impact: "Credential theft targeting Abanca, BBVA, Santander, Revolut, Wise"
+      - name: "Enterprises running Microsoft SharePoint (all versions)"
+        impact: "Remote code execution risk with low-privilege attacker account"
+      - name: "Organizations with high-performance computing environments"
+        impact: "Cryptojacking via stolen GPU resources, persistent remote access"
+      - name: "Mobile banking users — Brazil"
+        impact: "Banking credential theft, device remote control via Android RAT"
+
+    attack_methodology: |
+      Cryptojacking campaign: Attacker poisons search results AND AI chatbot 
+      responses. Employee downloads fake utility. Malware silently installs 
+      ScreenConnect. Attacker gains persistent remote access. GPU miners run 
+      hidden inside legitimate Windows processes. Mining continues undetected.
+
+      Banking trojan: Phishing email arrives. Employee clicks link. Malware 
+      loads via trusted software's DLL. Communications hide inside 
+      video-conferencing traffic. Bank credentials stolen and exfiltrated.
+
+      SharePoint: Attacker obtains or compromises any low-privilege SharePoint 
+      account (Site Member level). Sends crafted request to server. 
+      Deserialization flaw executes attacker code. Full server compromise achieved.
+
+      Android RAT: User visits fake streaming or crypto site. Downloads fake 
+      app from spoofed Google Play listing. App requests accessibility 
+      permissions. Attacker gains full remote device control. Banking apps 
+      hijacked at login.
+
+  why_it_matters:
+    business_risks:
+      financial_exposure: |
+        Direct costs include incident response ($500K–$2M average enterprise 
+        breach), stolen banking credentials with direct fraud liability, and 
+        GPU resource theft increasing cloud and infrastructure costs. 
+        SharePoint compromise enabling ransomware deployment can result in 
+        $5M–$50M operational disruption depending on organization size. 
+        BTMOB MaaS model at $700/month means criminal ROI is positive after 
+        a single successful corporate account compromise.
+
+      regulatory_compliance: |
+        SharePoint RCE triggering data breach activates GDPR notification 
+        obligations (72-hour window, fines up to 4% global revenue). Banking 
+        credential theft in EU contexts triggers PSD2 and EBA incident 
+        reporting. US organizations face SEC cyber incident disclosure 
+        requirements if material. HIPAA-covered entities with SharePoint 
+        deployments face mandatory breach notification.
+
+      competitive_impact: |
+        Cryptojacking degrades system performance for affected engineering 
+        and design teams — impacting product delivery timelines without 
+        visible cause. Persistent ScreenConnect access means attackers 
+        may exfiltrate IP, M&A data, or customer records for weeks before 
+        detection. Banking credential compromise affecting treasury or 
+        finance teams creates direct fraud exposure and reputational risk.
+
+      operational_disruption: |
+        SharePoint compromise can take enterprise content management 
+        offline for 2–8 weeks depending on backup maturity. Cryptojacking 
+        typically discovered only after infrastructure cost spikes or 
+        performance complaints — average dwell time in similar campaigns 
+        exceeds 60 days. Mobile RAT compromise of executive devices creates 
+        board-level confidentiality exposure.
+
+    industry_patterns:
+      affected_sectors:
+        - "Financial Services and Banking"
+        - "Enterprise Technology and SaaS"
+        - "Healthcare (SharePoint-dependent workflows)"
+        - "Manufacturing and Engineering (high-performance workstations)"
+        - "Legal and Professional Services"
+
+      trend_analysis: |
+        These three campaigns represent a structural shift, not isolated 
+        incidents. Attackers are systematically moving from email-based 
+        delivery (filtered and trained-against) to trusted channel 
+        exploitation: AI assistants, video conferencing protocols, and 
+        legitimate remote management tools.
+
+        The commercialization of RAT toolkits (BTMOB at $700/month) and 
+        the emergence of AI search poisoning signals that attack 
+        infrastructure is now productized. Criminal operators no longer 
+        need technical sophistication — they need a subscription and a 
+        target list. This industrialization compresses the time between 
+        vulnerability discovery and mass exploitation.
+
+technical_context:
+  vulnerability_details:
+    cve_identifier: "CVE-2026-45659"
+    vulnerability_type: |
+      SharePoint deserialization flaw — server processes attacker-controlled 
+      data without validation, allowing arbitrary code execution. Requires 
+      only a low-privilege authenticated account (Site Member or higher).
+    affected_systems:
+      - "Microsoft SharePoint Server Subscription Edition"
+      - "Microsoft SharePoint Server 2019"
+      - "Microsoft SharePoint Enterprise Server 2016"
+      - "Windows systems with high-performance GPUs (cryptojacking campaign)"
+      - "Android devices (BTMOB RAT)"
+    exploitation_status: "Active — patch available, exploitation assessed probable"
+
+  attack_indicators:
+    - "Unexpected ScreenConnect or ConnectWise Control installations on endpoints"
+    - "Unusual outbound traffic on WebRTC or WebSocket ports from non-conferencing apps"
+    - "GPU utilization spikes on workstations during off-hours"
+    - "New Microsoft Defender exclusions added outside of IT change management"
+    - "SharePoint authentication events from unusual IP ranges or off-hours"
+    - "Android devices requesting accessibility service permissions for non-UI apps"
+    - "Downloads originating from gleeze[.]com subdomains or unfamiliar ZIP sources"
+
+strategic_response:
+  executive_decisions:
+    - priority: "Critical"
+      decision: "Emergency SharePoint patch deployment with 48-hour deadline"
+      business_justification: |
+        CVSS 8.8 with low-privilege exploitation requirement means any 
+        disgruntled employee, compromised vendor account, or phished intern 
+        can achieve full server control. SharePoint holds contracts, HR data, 
+        and operational documents. Delay equals accepted liability.
+      cost_estimate: "Internal IT time: $10K–$50K. Cost of breach: $5M–$50M."
+
+    - priority: "Critical"
+      decision: "Establish AI assistant governance policy with URL recommendation controls"
+      business_justification: |
+        Microsoft's own research confirms AI chatbots are now a malware 
+        delivery vector. Without policy, employees will continue trusting 
+        AI-recommended downloads. This is a new attack surface with no 
+        existing organizational defense.
+      cost_estimate: "Policy development: $15K–$30K. Vendor engagement: included in existing contracts."
+
+    - priority: "High"
+      decision: "Audit all Remote Management Tool (RMT) deployments enterprise-wide"
+      business_justification: |
+        ScreenConnect abuse is the persistence mechanism in the active 
+        campaign. Unauthorized RMT installations are the attacker's 
+        long-term foothold. Without an asset inventory, you cannot know 
+        if you are already compromised.
+      cost_estimate: "$20K–$80K for audit. Ongoing monitoring: $30K–$100K annually."
+
+    - priority: "High"
+      decision: "Mandate mobile device management (MDM) enforcement for all devices accessing corporate banking or financial applications"
+      business_justification: |
+        BTMOB RAT specifically targets banking apps on Android. Executive 
+        and finance team devices without MDM enforcement are unmanaged 
+        risk. A compromised CFO device during a wire transfer represents 
+        direct, uninsured financial exposure.
+      cost_estimate: "$50K–$200K annually depending on fleet size."
+
+  governance_implications:
+    board_reporting: |
+      Recommended board metrics this quarter: (1) SharePoint patch 
+      compliance percentage — target 100% within 2 weeks. (2) Count of 
+      unauthorized RMT tool installations discovered. (3) AI assistant 
+      governance policy status — approved/in-review/not-started. 
+      (4) Mobile device MDM enrollment percentage for finance and 
+      executive teams.
+
+    disclosure_requirements: |
+      If SharePoint systems contain personal data of EU residents and 
+      a breach is confirmed, GDPR Article 33 requires supervisory 
+      authority notification within 72 hours. SEC Rule 13a-15 requires 
+      material cybersecurity incident disclosure for public companies. 
+      Legal counsel should be engaged immediately upon confirmed compromise.
+
+analysis_and_insights:
+  uncomfortable_truths: |
+    The AI chatbot poisoning campaign exposes a governance gap most 
+    organizations have not addressed: AI tools were approved for 
+    productivity, not evaluated as a content delivery attack surface. 
+    Every organization that deployed an AI assistant without URL 
+    validation policies has an open question about whether it has 
+    already directed employees to malicious sites.
+
+    The Grandoreiro campaign hiding in WebRTC traffic is a direct 
+    response to organizations investing in email security. Attackers 
+    do not fight your defenses — they route around them. The 
+    $2M email security platform provides zero protection against 
+    malware delivered through video-conferencing traffic patterns.
+
+    The commercialization of BTMOB at $700/month means the threat 
+    actor profile for your next mobile banking compromise may be 
+    someone with no technical background and a credit card. 
+    Sophistication is no longer a barrier to entry.
+
+  strategic_lessons:
+    - "Trusted channels are the new attack surface — AI tools, RMM software, and WebRTC are not inherently safe"
+    - "Patch velocity matters more than patch perfection — a 48-hour window on CVSS 8.8+ flaws is non-negotiable"
+    - "Commercialized malware-as-a-service compresses your detection window — assume faster initial access than historical baselines"
+    - "AI assistant governance must be treated as a security control, not just an acceptable-use policy"
+    - "Mobile device risk is now equivalent to endpoint risk for financial and executive functions"
+
+forward_outlook:
+  predictions: |
+    AI search poisoning will accelerate over the next 6–12 months as 
+    more organizations adopt AI assistants for employee productivity. 
+    Attackers will invest in optimizing responses from major LLM 
+    platforms, creating a new category of threat requiring AI vendor 
+    accountability and enterprise-level URL filtering at the AI 
+    output layer. Expect dedicated AI poisoning-as-a-service offerings 
+    to emerge on criminal forums by Q1 2027.
+
+    Banking malware targeting will expand beyond Latin America and 
+    Europe as BTMOB and similar MaaS platforms reduce operational 
+    cost for new campaigns. SharePoint and similar enterprise 
+    collaboration platforms will remain high-value targets given 
+    their privileged data access and historically slow enterprise 
+    patch cycles. Organizations without automated patch compliance 
+    monitoring will face increasing regulatory scrutiny as 
+    cyber insurance underwriters begin requiring demonstrated 
+    patch velocity for coverage.
+
+source_articles:
+  - title: "Grandoreiro Malware and BTMOB RAT Campaigns Target Windows and Android Users"
+    url: "https://thehackernews.com/2026/05/grandoreiro-malware-btmob-rat.html"
+    date: "2026-05-27"
+
+  - title: "GPU mining malware spreads via SEO poisoning, AI chatbots"
+    url: "https://www.bleepingcomputer.com/news/security/gpu-mining-malware-spreads-via-seo-poisoning-ai-chatbots/"
+    date: "2026-05-27"
+
+  - title: "AI chatbot recommendations lure users to cryptojacking malware sites"
+    url: "https://www.csoonline.com/article/ai-chatbot-cryptojacking-malware"
+    date: "2026-05-27"
+
+  - title: "Microsoft SharePoint Has a New RCE Flaw — Patch Now"
+    url: "https://securityaffairs.com/microsoft-sharepoint-cve-2026-45659-rce"
+    date: "2026-05-27"
+
+  - title: "Proposal: Generic Methods for Go"
+    url: "https://github.com/golang/go/issues/generic-methods-proposal"
+    date: "2026-05-27"
+    note: "Included as source context — not a threat article; excluded from threat analysis"
+
+metadata:
+  author: "Am Dum Dee"
+  last_updated: "2026-05-27"
+  threat_category:
+    - "Banking Malware"
+    - "Cryptojacking"
+    - "AI Search Poisoning"
+    - "Remote Access Trojan"
+    - "Enterprise Vulnerability"
+  affected_industries:
+    - "Financial Services"
+    - "Healthcare"
+    - "Enterprise Technology"
+    - "Manufacturing"
+    - "Legal and Professional Services"
+  confidence_level: "High"
