@@ -1,0 +1,115 @@
+---
+filename: "2026-06-08-ai-trust-infrastructure-threats.yaml"
+
+metadata:
+  threat_id: "TI-20260608-AAT"
+  report_date: "2026-06-08"
+  severity_business: "Critical"
+  severity_technical: "High"
+  confidence: "High"
+
+executive_summary:
+  title: "AI, Identity, and Trust Infrastructure Under Attack"
+  summary: >
+    Multiple June 2026 disclosures highlight a common theme:
+    attackers are increasingly targeting trust systems rather than
+    traditional perimeter controls.
+
+key_findings:
+  - "Linux privilege escalation exploit publicly available"
+  - "Android banking malware distributed via GitHub"
+  - "Meta AI recovery workflow enabled account hijacking"
+  - "NSO-linked targeting activity continues"
+  - "AI acceleration is reducing exploit development timelines"
+
+threats:
+
+  - name: "Linux Kernel Privilege Escalation"
+    cve: "CVE-2026-23111"
+    severity: "High"
+
+    business_impact:
+      - "Compromised containers can become host compromise"
+      - "Administrative control obtained after initial access"
+      - "Increased incident response costs"
+
+    affected_platforms:
+      - "Debian"
+      - "Ubuntu"
+      - "RHEL"
+
+    exploitation_status: "Public exploit available"
+
+    executive_action:
+      - "Review privileged workload exposure"
+      - "Verify patch governance effectiveness"
+      - "Measure remediation speed"
+
+  - name: "NFCShare Banking Malware"
+    severity: "High"
+
+    business_impact:
+      - "Payment card theft"
+      - "Customer fraud losses"
+      - "Brand trust erosion"
+
+    targeting:
+      - "European banking customers"
+      - "Mobile banking users"
+
+    executive_action:
+      - "Review customer fraud monitoring"
+      - "Assess mobile application trust controls"
+
+  - name: "Meta AI Recovery Workflow Abuse"
+    severity: "Critical"
+
+    affected_accounts: 20225
+
+    business_impact:
+      - "Account takeover"
+      - "Customer trust damage"
+      - "Potential regulatory scrutiny"
+
+    executive_action:
+      - "Review AI-enabled customer workflows"
+      - "Require human validation for high-risk actions"
+
+strategic_assessment:
+
+  uncomfortable_truth:
+    >
+    Most organizations continue investing heavily in detection
+    while underinvesting in trust validation and resilience.
+
+  board_questions:
+    - "How quickly can critical exposure be reduced?"
+    - "Which AI workflows create business risk?"
+    - "What trust systems could fail at scale?"
+    - "How is resilience being measured?"
+
+forward_look:
+  prediction: >
+    AI-assisted exploitation and identity-centric attacks
+    will continue increasing through 2026.
+
+sources:
+  - title: "One-Character Linux Kernel Flaw Enables Local Root Access"
+    source: "The Hacker News"
+    date: "2026-06-08"
+
+  - title: "NFCShare Android malware spreads via fake banking app updates on GitHub"
+    source: "BleepingComputer"
+    date: "2026-06-08"
+
+  - title: "Meta Accuses NSO of Violating WhatsApp Court Injunction"
+    source: "Security Affairs"
+    date: "2026-06-08"
+
+  - title: "MiMo-V2.5-Pro-UltraSpeed"
+    source: "Xiaomi MiMo"
+    date: "2026-06-08"
+
+  - title: "Hackers used Meta's AI support system to hijack over 20,000 Instagram accounts"
+    source: "Security News"
+    date: "2026-06-08"
