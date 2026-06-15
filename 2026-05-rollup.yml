@@ -1,0 +1,174 @@
+---
+rollup_summary:
+  title: "May 2026 Threat Intelligence Rollup — The Collapse of Trusted Infrastructure"
+  period: "May 2026"
+  period_type: "monthly"
+  rollup_id: "RU-202605-001"
+  reports_synthesized: 31
+
+  executive_summary: |
+    May 2026 was the month the security model built on "trusted infrastructure"
+    stopped holding. Across all 31 daily reports, the same structural story
+    repeated in different costumes: firewalls, cPanel, MOVEit, RMM tools, AI
+    coding assistants, GitHub Actions, npm, VS Code extensions, Cisco SD-WAN,
+    Microsoft Exchange, CMS platforms, and even cybersecurity vendors themselves
+    were the entry point — not the perimeter. Attackers stopped trying to break
+    in and started walking through doors organizations already left open and
+    paid for.
+
+    The second defining thread was AI crossing from defensive talking point to
+    operational reality on both sides. Google confirmed the first AI-discovered
+    zero-day used in the wild. Microsoft's MDASH found Windows vulnerabilities
+    before human researchers did. The UK's AI Security Institute confirmed
+    autonomous offensive capability is doubling every 4-5 months. By month-end,
+    AI platforms themselves (ChatGPT, Claude, Adobe Target) had become phishing
+    and malware-distribution infrastructure that traditional filters whitelist
+    by default.
+
+    The third thread was scale and dwell time. Education sector breaches alone
+    accounted for hundreds of millions of records (Instructure/Canvas: 280M
+    records across two breaches in seven days). BWH Hotels had an undetected
+    attacker for over six months. A 17-million-device botnet operated
+    undetected for years before Dutch law enforcement dismantled it. The gap
+    between compromise and detection is now measured in months, not days.
+
+    By the final week, the pattern had fully converged: software supply chain
+    attacks, AI-platform abuse, and infrastructure-level authentication bypasses
+    were no longer separate categories of news — they were the same story told
+    five different ways every single day.
+
+period_analysis:
+  dominant_patterns:
+    - pattern: "Trusted infrastructure and supply chain weaponization"
+      frequency: "Appeared in 24 of 31 reports"
+      significance: |
+        The single largest pattern of the month. Firewalls (Palo Alto),
+        hosting control panels (cPanel/WHM), file transfer tools (MOVEit),
+        RMM software, npm/GitHub Actions/VS Code extensions, CMS platforms
+        (700+ sites including Harvard and Oxford), and even a cybersecurity
+        vendor's own source code (Trellix) were all compromised this month.
+        This signals that perimeter-based security models are now
+        structurally obsolete — the attack surface is every vendor
+        relationship an organization has.
+
+    - pattern: "AI as both attacker and attack surface"
+      frequency: "Appeared in 18 of 31 reports"
+      significance: |
+        AI moved from "future risk" to "this week's incident" in May.
+        Google confirmed AI-discovered zero-days in active use; Microsoft's
+        AI found Windows flaws before humans; AI coding libraries (PyTorch
+        Lightning) were poisoned; and by month's end, ChatGPT, Claude, and
+        Adobe Target were themselves vectors for credential theft and
+        malware delivery. For boards, this collapses the usual timeline for
+        AI governance — the risk window is already open, not approaching.
+
+    - pattern: "Extended dwell time and scale escalation"
+      frequency: "Appeared in 8 of 31 reports"
+      significance: |
+        Breaches this month weren't measured in records stolen but in
+        months of undetected access (BWH Hotels: 6+ months; a 17M-device
+        botnet operating for years) and record counts that dwarfed prior
+        norms (Instructure/Canvas: 280M records, twice in one week).
+        This indicates detection capability is not keeping pace with
+        attacker patience, and that "no evidence of access" claims from
+        vendors deserve more scrutiny, not less.
+
+  notable_escalations: |
+    The clearest escalation is speed: Verizon's 2026 DBIR confirmed
+    vulnerability exploitation overtook stolen credentials as the top
+    initial access vector for the first time in 19 years, and multiple
+    reports this month described AI compressing the gap between
+    vulnerability disclosure and mass exploitation from weeks to hours.
+    Ransomware economics also shifted — payment rates collapsed to 28%,
+    pushing criminal groups toward pure data extortion rather than
+    encryption, which removes the operational disruption that often
+    triggered fast incident response in the past.
+
+  sector_concentration:
+    most_targeted:
+      - sector: "Financial Services"
+        why: "Appeared as a primary or secondary target in nearly every report — phishing, AiTM session theft, banking trojans, AI-enabled fraud, and supply chain exposure all converged here repeatedly."
+      - sector: "Technology and Software Development"
+        why: "The month's central battleground — npm, GitHub Actions, VS Code, AI libraries, and code repositories (Gogs, GitHub/Grafana) were repeatedly compromised, making developer environments the primary lateral-movement path into everything else."
+      - sector: "Healthcare"
+        why: "Consistently named across AiTM phishing, RMM abuse, AI infrastructure exposure, and banking trojan campaigns — a sector with high data value and historically slower patch cycles."
+    emerging_targets:
+      - sector: "Education / EdTech"
+        why: "Instructure's Canvas platform was breached twice in seven days for a combined 280M+ records, alongside separate education sector extortion — a scale of exposure not previously seen in this sector."
+      - sector: "AI Infrastructure Providers"
+        why: "Ollama, AI inference servers, and AI development frameworks moved from niche tooling to confirmed mass-exploitation targets, with 300,000+ exposed servers identified in a single report."
+
+strategic_synthesis:
+  what_changed_this_period: |
+    At the start of May, "supply chain risk" and "AI risk" were still largely
+    treated as distinct, emerging categories — important but bounded. By the
+    end of May, they had merged into a single operational reality: the tools,
+    platforms, and AI systems an organization trusts and pays for are now its
+    largest attack surface, and AI is accelerating how fast attackers find and
+    exploit that surface. The shift is from "harden the perimeter" to "every
+    vendor relationship is a potential intrusion path, and AI has shortened
+    the time you have to respond."
+
+  board_level_implications:
+    - implication: "Third-party and AI vendor risk assessment needs to move from annual review to continuous monitoring"
+      action_horizon: "Immediate"
+    - implication: "Detection and dwell-time metrics deserve the same board visibility as patch compliance — multiple month-long undetected breaches occurred this month"
+      action_horizon: "This quarter"
+    - implication: "AI tool adoption policies (internal use of ChatGPT/Claude, AI coding assistants, AI infrastructure like Ollama) need governance frameworks now, not after a formal AI strategy is finalized"
+      action_horizon: "Immediate"
+    - implication: "Incident response planning should assume extortion-without-encryption as the default ransomware scenario, changing what 'recovery' looks like"
+      action_horizon: "This year"
+
+  governance_priorities: |
+    Boards should prioritize reviewing the inventory of software supply chain
+    dependencies (open source packages, CI/CD tooling, AI libraries) with the
+    same rigor previously applied to core infrastructure vendors. Funding
+    conversations should shift toward detection and dwell-time reduction
+    rather than additional preventive controls alone, since this month's
+    most damaging incidents were defined by how long they went unnoticed.
+    AI governance — covering both employee use of AI platforms and AI
+    embedded in vendor products — should be elevated from an IT topic to a
+    standing board agenda item.
+
+forward_outlook:
+  next_period_predictions: |
+    Expect the supply chain and AI threads to continue converging rather than
+    separating. AI-discovered vulnerabilities will likely produce at least one
+    high-profile mass-exploitation event in June, given the trajectory
+    described by the UK AI Security Institute and Microsoft's MDASH findings.
+    Education and hospitality sectors remain exposed following May's large
+    breaches, and further disclosures tied to the Instructure/Canvas incident
+    are plausible as investigations continue.
+
+    The shift from ransomware-with-encryption to pure data extortion is likely
+    to accelerate, meaning organizations should expect fewer "noisy" ransomware
+    events and more quiet, prolonged extortion negotiations that may not
+    trigger traditional incident response triggers as quickly.
+
+    Watch for continued abuse of AI platforms themselves as phishing and
+    malware infrastructure — this pattern emerged late in May and is likely
+    still in its early stages of attacker adoption.
+
+  watch_list:
+    - "AI platform abuse (ChatGPT, Claude, AI coding assistants) as phishing/malware delivery infrastructure"
+    - "Further fallout from the Instructure/Canvas 280M-record education breach"
+    - "Continued exploitation of unpatched Linux privilege escalation flaws (Dirty Frag, Copy Fail, and related CVEs)"
+
+period_metrics:
+  total_reports: 31
+  critical_severity_count: 27
+  dominant_threat_categories:
+    - "Supply Chain Attack"
+    - "AI-Enabled Offensive Operations / AI Security"
+    - "Credential Theft / Identity Compromise"
+    - "Ransomware / Data Extortion"
+
+metadata:
+  author: "Am Dum Dee"
+  rollup_date: "2026-05-31"
+  period_covered: "2026-05-01 to 2026-05-31"
+  confidence_level: "High"
+  post_metadata:
+    hook_used: "Trust infrastructure collapse"
+    rollup_type: "monthly"
+    variation_round: "1"
