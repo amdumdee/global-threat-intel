@@ -1,0 +1,215 @@
+---
+rollup_summary:
+  title: "February 2026 Threat Intelligence Rollup — AI Crosses the Line"
+  period: "February 2026"
+  period_type: "monthly"
+  rollup_id: "RU-202602-001"
+  reports_synthesized: 28
+
+  executive_summary: |
+    If January 2026 was the month trust infrastructure became the primary
+    attack surface, February 2026 was the month AI crossed from defensive
+    talking point into active threat category — on both sides of the fight,
+    simultaneously. Across all 28 reports, the same structural escalation
+    played out: attackers weaponized the AI tools organizations had already
+    deployed, while AI simultaneously began compressing every phase of the
+    attack lifecycle — reconnaissance, lure creation, malware development,
+    and autonomous lateral movement.
+
+    The month's most consequential single disclosure was Google's confirmation
+    that state-backed actors from North Korea, Iran, China, and Russia were
+    all actively using Gemini AI for target profiling, phishing persona
+    creation, and on-demand malware generation. HONESTCUE malware made the
+    structural implication explicit: it generates C# attack code via the
+    Gemini API, compiles it in memory, and executes without writing a single
+    file to disk — defeating signature-based detection architecturally, not
+    through evasion. Meanwhile, Claude.ai artifacts and ChatGPT were confirmed
+    as active phishing and malware delivery infrastructure; VoidLink, an
+    AI-built attack framework, compiled custom plugins on demand for each
+    target environment.
+
+    The second defining thread was the collapse of marketplace trust at every
+    layer. Microsoft's official Outlook add-in store hosted a credential-
+    stealing phishing kit for four years. Hundreds of malicious OpenClaw/
+    ClawHub AI agent skills delivered credential theft and persistent remote
+    access. Cline CLI — a developer tool — had its npm token compromised and
+    pushed unauthorized software to developer machines on update. The Notepad++
+    update chain was hijacked and used to selectively target government,
+    financial, and infrastructure organizations. The pattern across all of them:
+    approved once, weaponized indefinitely.
+
+    The third thread was scale. The Conduent breach hit 25 million individuals
+    — with Volvo Group North America learning their employees' Social Security
+    numbers had been exposed over a year after the fact. Odido's telecom breach
+    hit 6.2 million Dutch customers including bank account details and
+    government ID numbers. A blockchain-hosted botnet rendered traditional
+    infrastructure takedowns obsolete. And commercial software vulnerability
+    counts doubled year-over-year, with 88% of ransomware confirmed to deploy
+    outside business hours — specifically timed to avoid detection.
+
+    By month-end, February had documented AI-enabled malware that defeats
+    signature detection, supply chain compromise that inherits marketplace
+    approval, breaches at nine-figure scale with year-long notification delays,
+    and AI coding tools confirmed as insider-access delivery mechanisms.
+
+period_analysis:
+  dominant_patterns:
+    - pattern: "AI as active attack infrastructure and development platform"
+      frequency: "Appeared in 24 of 28 reports"
+      significance: |
+        February was the month AI stopped being a risk category and became a
+        documented attack tool. State actors across four nations used Gemini
+        for reconnaissance and on-demand malware. HONESTCUE's fileless,
+        API-generated architecture defeats signature detection structurally —
+        not through clever evasion. VoidLink was built using AI coding tools
+        and compiled unique plugins per target. The Arkanix infostealer showed
+        clear LLM-assisted development — compressing malware production from
+        weeks to hours. And AI platforms (Claude, ChatGPT, Gemini) were used
+        as delivery infrastructure because security tools whitelist them by
+        default. For boards: the AI governance conversation is no longer about
+        future risk. It is about current, documented, active compromise.
+
+    - pattern: "Marketplace and supply chain trust weaponization at platform scale"
+      frequency: "Appeared in 21 of 28 reports"
+      significance: |
+        February's supply chain pattern moved up the stack from individual
+        packages to platform-level infrastructure. Microsoft's official Outlook
+        marketplace hosted a phishing kit for four years. ClawHub (the official
+        OpenClaw skill registry) distributed hundreds of malicious AI agent
+        skills. Cline CLI's npm token compromise pushed malware via the update
+        mechanism. The Notepad++ update chain was selectively targeting
+        high-value organizations. Each attack inherited the trust of an official
+        platform or distribution channel — not a shadow repository, not a fake
+        site. The approve-once, trust-forever model is now a documented attack
+        surface at every software distribution layer.
+
+    - pattern: "Breach scale and notification failure compounding downstream risk"
+      frequency: "Appeared in 11 of 28 reports"
+      significance: |
+        February's breach disclosures were defined not just by scale but by
+        time: Conduent's 25-million-record ransomware breach had Volvo Group
+        employees learning about their SSN exposure over a year after the fact.
+        The Odido telecom breach — 6.2M records including bank account details
+        and government IDs — was discovered on a weekend and notified to Dutch
+        authorities within 72 hours, but downstream organizational exposure
+        persisted. PayPal disclosed a six-month breach window. These timelines
+        confirm that third-party breach notification failures are systemic, not
+        exceptional, and that the liability tail for any vendor holding PII
+        extends far beyond the incident date.
+
+  notable_escalations: |
+    The single most significant escalation of the month is HONESTCUE's
+    architecture: fileless, API-driven malware that generates unique payloads
+    per target using a commercial AI API. This is not a vulnerability that can
+    be patched — it is a capability shift. Signature-based endpoint detection
+    has no file to match. The only mitigation is behavioral detection, which
+    most enterprise stacks are not primarily built around. The UK's AI Security
+    Institute confirmed autonomous offensive capability is doubling every
+    4-5 months. February documented what that trajectory looks like in practice.
+
+    The second significant escalation: a blockchain-hosted botnet that renders
+    traditional infrastructure takedowns obsolete. Law enforcement cannot seize
+    a blockchain. This represents a durable, takedown-resistant C2 model that
+    is now documented and in active use.
+
+  sector_concentration:
+    most_targeted:
+      - sector: "Financial Services"
+        why: "Targeted across credential theft (password manager vulnerabilities affecting 125K+ businesses), telecom breach data enabling account fraud, BeyondTrust RCE exposing managed endpoints, and AI-assisted targeting by all four major nation-state groups. The sector's data value and authentication infrastructure made it the month's most consistent target."
+      - sector: "Technology and Software Development"
+        why: "Developer tools were the month's primary weaponization layer: VS Code, npm packages, Cline CLI, ClawHub AI skills, GitHub Copilot prompt injection, and Notepad++ update hijacking. Compromising a developer pipeline provides upstream access to every product and customer downstream."
+      - sector: "Government and Defense"
+        why: "Roundcube Webmail added to CISA KEV after confirmed espionage abuse. BeyondTrust RCE with a CISA federal deadline. Chinese espionage via Google Sheets across 53 organizations in 42 countries. Singapore's four largest telecoms breached by UNC3886. Nation-state targeting of government infrastructure intensified throughout the month."
+    emerging_targets:
+      - sector: "AI Platform Infrastructure"
+        why: "OpenClaw, ClawHub, and AI agent ecosystems emerged as a confirmed, exploited attack surface. Over 30,000 exposed OpenClaw instances, hundreds of malicious skills in the official registry, and prompt injection across GitHub Copilot and AI coding tools confirmed this sector's transition from niche to critical."
+      - sector: "Telecommunications"
+        why: "Odido (Netherlands, 6.2M records), Singapore's four major telecoms (UNC3886), and Deutsche Bahn disruption all landed in February. Telecom breach data — phone numbers, IDs, bank details — creates downstream fraud infrastructure that persists long after the breach itself."
+
+strategic_synthesis:
+  what_changed_this_period: |
+    The sharpest change between January and February is specificity. January
+    documented that AI was becoming an attack vector. February documented the
+    exact mechanisms: fileless malware generated via commercial API, state
+    actors confirmed using four different AI platforms, AI coding tools used
+    as delivery infrastructure for developer targeting, and AI building attack
+    frameworks that compile unique plugins per victim. The abstraction of
+    "AI risk" became a concrete capability inventory in a single month.
+
+    The second meaningful shift: the barrier to building functional malware
+    collapsed. Arkanix showed LLM-assisted malware development compressing
+    the production timeline from weeks to hours. HONESTCUE showed AI generating
+    attack code on demand with no static artifact for detection. These are not
+    incremental improvements — they structurally change who can build offensive
+    tools and how fast the attack landscape can diversify.
+
+  board_level_implications:
+    - implication: "AI platform acceptable use policy and API key governance must be immediate priorities — AI infrastructure is confirmed attack delivery and C2 infrastructure, not just a productivity risk"
+      action_horizon: "Immediate"
+    - implication: "Behavioral endpoint detection must be treated as a strategic priority equal to signature-based tools — fileless, API-generated malware defeats signature detection architecturally"
+      action_horizon: "This quarter"
+    - implication: "Every software marketplace tool — Outlook add-ins, VS Code extensions, AI agent skills, browser extensions — requires an audit for active maintenance and ongoing content verification"
+      action_horizon: "This quarter"
+    - implication: "Third-party breach notification SLAs must be contractual, not assumed — the Conduent/Volvo 14-month gap is the documented default, not an anomaly"
+      action_horizon: "This year"
+
+  governance_priorities: |
+    Boards should focus February's pattern into three structural conversations.
+    First, AI governance: which platforms are approved, what data classifications
+    can enter them, how are API credentials managed, and what is the policy for
+    AI-hosted content that employees interact with? February confirmed that
+    trusted AI domains are now malware delivery surfaces. Second, detection
+    strategy: if the primary new malware architecture (HONESTCUE, VoidLink)
+    is explicitly designed to defeat signature-based detection, what is the
+    investment in behavioral monitoring and what does that coverage look like
+    against the current threat? Third, marketplace hygiene: the approve-once
+    model is broken across every software distribution layer. What is the
+    cadence for reviewing installed tools, and how does the organization define
+    "active maintenance" as a security standard?
+
+forward_outlook:
+  next_period_predictions: |
+    The AI-as-attack-infrastructure pattern will accelerate in March and beyond.
+    With four nation-state groups confirmed using commercial AI platforms and
+    the UK AI Security Institute documenting doubling of autonomous offensive
+    capability every 4-5 months, the trajectory is not speculative. Expect
+    additional fileless malware architectures using commercial AI APIs, and
+    expect attackers to rotate across AI platforms as individual providers
+    implement countermeasures.
+
+    The supply chain pattern will continue moving up the stack — from packages
+    to tools to platforms to AI agents. ClawHub/OpenClaw established the
+    pattern for AI agent marketplace exploitation; expect similar campaigns
+    across other AI agent ecosystems as adoption grows. The blockchain botnet
+    model, being takedown-resistant, will likely be adopted by additional
+    criminal groups once its efficacy is demonstrated.
+
+    Telecom breach data from Odido will fuel impersonation campaigns targeting
+    Dutch and adjacent-market organizations for months. The 6.2 million records
+    — including government IDs and bank account details — are optimized for
+    SIM swap, account takeover, and social engineering at scale.
+
+  watch_list:
+    - "HONESTCUE-style fileless API-generated malware expanding beyond Gemini to other commercial AI APIs"
+    - "AI agent marketplace exploitation (ClawHub pattern) spreading to Copilot extensions, Claude tools, and other agent ecosystems"
+    - "Blockchain-hosted C2 infrastructure adoption by ransomware groups as a takedown-resistant model"
+
+period_metrics:
+  total_reports: 28
+  critical_severity_count: 25
+  dominant_threat_categories:
+    - "AI Platform Abuse / AI-Assisted Attacks"
+    - "Supply Chain Attack / Marketplace Trust Exploitation"
+    - "Nation-State Operations (North Korea, China, Russia, Iran)"
+    - "Credential Theft / Identity Compromise"
+    - "Ransomware / Data Extortion"
+
+metadata:
+  author: "Am Dum Dee"
+  rollup_date: "2026-02-28"
+  period_covered: "2026-02-01 to 2026-02-28"
+  confidence_level: "High"
+  post_metadata:
+    hook_used: "AI crosses the line"
+    rollup_type: "monthly"
+    variation_round: "1"
