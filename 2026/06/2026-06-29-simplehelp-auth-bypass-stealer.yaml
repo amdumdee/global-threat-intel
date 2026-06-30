@@ -1,7 +1,7 @@
 threat_summary:
   title: "Critical SimpleHelp Remote-Access Flaw Actively Exploited to Deploy Stealer Malware"
-  report_date: "2026-06-30"
-  threat_id: "TI-20260630-001"
+  report_date: "2026-06-29"
+  threat_id: "TI-20260629-001"
   severity_business: "Critical"
   severity_technical: "Critical"
 
@@ -211,7 +211,7 @@ source_articles:
 
 metadata:
   author: "Am Dum Dee"
-  last_updated: "2026-06-30"
+  last_updated: "2026-06-29"
   threat_category:
     - "Authentication Bypass"
     - "Credential Theft / Stealer Malware"
